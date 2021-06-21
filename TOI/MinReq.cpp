@@ -13,35 +13,70 @@ using namespace std;
 
 using ll = long long;
 
-int l[11], a[11], s[11], t[11], q[15];
+const int MxN = 1e7 + 2;
+
+int p[15];
+int l[15], a[15], s[15], t[15], qr[MxN], qs[15];
 int n, m, x;
 
-bool solve2(int i){
-	for(int i=1; i<=n; ++i){
-		cin >> q[i];
+bool val(int t){
+	vector<int> mkr(n+1);
+	for(int j, i=1; i<=n; ++i){
+		for(j=1; j<=n; ++j){
+			if(mkr[j]){
+				continue;
+			}
+			int lb = p[i];
+			int rb = p[i+1];
+			int cnt = 0, ch = 1;
+			while(lb < rb && ch){
+				++cnt;
+				int nx = upper_bound(qs+lb, qs+rb, l[j] - a[i] + qs[lb-1]) - qs;
+				if(nx == lb){
+					ch = 0;
+				}
+				lb = nx;
+			}
+			if(ch && cnt <= t){
+				mkr[j] = 1;
+				break;
+			}
+		}
+		if(j == n + 1){
+			return 0;
+		}
 	}
-	q[n+1] = m + 1;
-	vector<int>nin;
+	return 1;
+}
+
+bool solve2(int x){
 	for(int i=1; i<=n; ++i){
-		int l, r;
+		cin >> p[i];
 	}
+	p[n+1] = m;
+	do{
+		if(val(x))
+		return true;
+	}while(next_permutation(a+1, a+n+1));
+	return false;
 }
 
 void solve(){
 	cin >> n >> m >> x;
-	for(int i=0; i<n; ++i){
+	for(int i=1; i<=n; ++i){
 		cin >> l[i];
 	}
-	for(int i=0; i<n; ++i){
+	for(int i=1; i<=n; ++i){
 		cin >> a[i];
 	}
-	for(int i=0; i<n; ++i){
-		cin >> s[i];
+	for(int i=1; i<=m; ++i){
+		cin >> qs[i];
+		qs[i] += qs[i-1];
 	}
-	for(int i=0; i<n; ++i){
-		cin >> t[i];
+	for(int i=1; i<=x; ++i){
+		cin >> qr[i];
 	}
-	sort(l, l+n);
+	sort(l+1, l+n+1);
 	for(int i=1; i<=x; ++i){
 		cout << (solve2(i)?"P":"F") << "\n";
 	}
