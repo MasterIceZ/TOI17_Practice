@@ -17,13 +17,32 @@ using ll = long long;
 const int MxN = 277777;
 
 int n, m;
-int a[MxN];
+int a[MxN], dp[2][MxN];
 
 void solve(){
 	int n;
 	cin >> n;
 	for(int i=1; i<=n; ++i){
 		cin >> a[i];
+	}
+	int ans = -1;
+	memset(dp, -1, sizeof dp);
+	for(int k=0; k<=(40 + log2(n)); ++k){
+		for(int i=1; i<=n; ++i){
+			if(a[i] == k){
+				dp[k%2][i] = i + 1;
+			}
+			else{
+				dp[k % 2][i] = dp[(k + 1) % 2][dp[(k + 1) % 2][i]];
+			}
+			if(dp[k%2][i] >= 1){
+					ans = max(ans, k);
+			}
+//			cout << dp[k % 2][i] << " ";
+		}
+//		cout << endl;
+	}
+	cout << ans;
 	return ;
 }
 

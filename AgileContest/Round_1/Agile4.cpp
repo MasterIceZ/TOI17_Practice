@@ -27,25 +27,34 @@ using ll = long long;
 
 int n, m;
 
-int dist[10010][300];
-vector<Edge> g[10010];
+ll sq(ll a){
+	ll l = 1, r = a;
+	while(l <= r){
+		 ll mid = (l + r) / 2;
+		 if(mid * mid == a){
+			 return mid;
+		 }
+		 if(mid <= a / mid){
+			 l = mid + 1;
+		 }
+		 else{
+			 r = mid - 1;
+		 }
+	 }
+	 return l - 1;
+ }
 
 void solve(){
-	
+	ll l, r;
+	cin >> l >> r;
+	cout << sq(r) + sq(r/2) - sq(l-1) - sq((l-1)/2);
 	return ;
 }
 
 int32_t main(){
 	cin.tie(nullptr)->ios::sync_with_stdio(false);
-	int a, q;
-	cin >> n >> m >> a >> q;
-	for(int i=1; i<=m; ++i){
-		int u, v, w, x;
-		cin >> u >> v >> w >> x;
-		g[u].push_back({v, w, x});
-		g[v].push_back({u, w, x});
-	}
-	for(int i=1; I
+	ll n, q;
+	cin >> n >> q;
 	while(q--){
 		solve();
 		cout << "\n";
