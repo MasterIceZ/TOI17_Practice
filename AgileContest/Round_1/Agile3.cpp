@@ -36,7 +36,7 @@ void solve(){
 		cannot |= 1 << (x - 1);
 	}
 	int ans = 1e9 + 2;
-	for(int i=0; i<8; ++i){
+	for(int i=0; i<(1 << 8); ++i){
 		if((cannot & i) == 0){
 			ans = min(ans, dist[b][i]);
 		}
