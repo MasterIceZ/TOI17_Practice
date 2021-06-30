@@ -36,7 +36,7 @@ void solve(){
 				dp[k % 2][i] = dp[(k + 1) % 2][dp[(k + 1) % 2][i]];
 			}
 			if(dp[k%2][i] >= 1){
-					ans = max(ans, k);
+				ans = max(ans, k);
 			}
 //			cout << dp[k % 2][i] << " ";
 		}
