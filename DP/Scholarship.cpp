@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
+ * TASK		: Scholarship
+ * ALGO		: Dynamic Programming
+ * DATE		: 7 July 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
