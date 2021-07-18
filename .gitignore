@@ -3,3 +3,5 @@ Task
 *.exe
 *.in
 *.out
+
+*.log
