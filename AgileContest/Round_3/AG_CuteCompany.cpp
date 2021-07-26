@@ -1,47 +1,38 @@
-/*
- * AUTHOR	: Hydrolyzed~
- * SCHOOL	: RYW
- * TASK		: AG_Cute Company
- * ALGO		: Dynamic Programming
- * DATE		: 24 July 2021
- * */
 #include<bits/stdc++.h>
 using namespace std;
-
-#define endl "\n"
-#define all(x) (x).begin(), (x).end()
 
 using ll = long long;
 
 const int MOD = 1e9 + 7;
 
 int dp[10010];
+int n;
 
-void solve(){
-	int n, m, k;
+int DP(int k){
 	memset(dp, 0, sizeof dp);
-	cin >> n >> k >> m;
-	if(m != 1){
-		return ;
-	}
 	dp[0] = 1;
 	for(int i=1; i<=n; ++i){
-		for(int j=n; j>=i; --j){
-			dp[j] += dp[j - i] * m;
-			dp[j] %= MOD;
+		for(int j=1; j<=min(i, k); ++j){
+			dp[i] += dp[i-j];
+			dp[i] %= MOD;
 		}
 	}
-	cout << dp[n] - 1;
-	return ;
+	return dp[n];
 }
 
-int main(){
+void query(){
+	int k, m;
+	cin >> n >> k >> m;
+	cout << (DP(k) - DP(m-1) + MOD) % MOD;
+}
+
+int32_t main(){
 	cin.tie(nullptr)->ios::sync_with_stdio(false);
-	int q = 1;
+	int q;
 	cin >> q;
 	while(q--){
-		solve();
-		cout << endl;
-	}
+		query();
+		cout << "\n";
+	}	
 	return 0;
 }
