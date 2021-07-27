@@ -14,10 +14,10 @@ using namespace std;
 using ll = long long;
 const int MxN = 100010;
 
+int n;
 vector<pair<int, int>> adj[MxN];
 pair<int, int> edge[MxN];
-int subtree[MxN];
-ll ans[MxN];
+ll subtree[MxN], ans[MxN], deg[MxN];
 
 void dfs(int u, int p, int idx){
 	subtree[u] = 1;
@@ -27,11 +27,11 @@ void dfs(int u, int p, int idx){
 			subtree[u] += subtree[x.first];
 		}
 	}
-	ans = (ll)(n - subtree[u]) * subtree[u];
+	ans[idx] = (ll)(n - subtree[u]) * subtree[u];
 }
 
 void solve(){
-	int n, m, u, v;
+	int m, u, v;
 	cin >> n >> m;
 	for(int i=1; i<=m; ++i){
 		cin >> u >> v;
@@ -39,20 +39,19 @@ void solve(){
 		edge[i] = make_pair(u, v);
 		deg[u]++, deg[v]++;
 	}
-	queue<int> pq;
+	queue<int> q;
 	for(int i=1; i<=n; ++i){
 		if(deg[u] == 1){
-			pq.push(i);
+			q.push(i);
 		}
 	}
-	while(!pq.empty()){
-		int now = pq.front();
-		pq.pop();
+	while(!q.empty()){
+		int now = q.front();
+		q.pop();
 		for(auto x: adj[now]){
-			if(deg[x.first]){
-				deg[u] -= 1;
-				if(deg[u] - 1 == 1){
-					deg[u] -= 1;
+			if(deg[x.first] > 0){
+				deg[u]--, deg[x.first]--;
+				if(deg[x.first] == 1){
 					q.push(x.first);
 				}
 			}
@@ -60,10 +59,18 @@ void solve(){
 	}
 	for(int i=1; i<=n; ++i){
 		if(deg[i] == 2){
-			dfs(u, 0, 0);
+			dfs(i, 0, 0);
 		}
 	}
-	
+	for(int i=1; i<=n; ++i){
+		if(deg[edge[i].first] == 2 && deg[edge[i].second] == 2){
+			cout << 0;
+		}
+		else{
+			cout << ans[i];
+		}
+		cout << " ";
+	}
 	return ;
 }
 

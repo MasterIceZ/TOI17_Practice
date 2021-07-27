@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		: AG_Cute Company
- * ALGO		: Dynamic Programming
- * DATE		: 24 July 2021
+ * TASK		: PZ_Word
+ * ALGO		: Greedy
+ * DATE		: 21 July 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
@@ -13,25 +13,21 @@ using namespace std;
 
 using ll = long long;
 
-const int MOD = 1e9 + 7;
-
-int dp[10010];
-
 void solve(){
-	int n, m, k;
-	memset(dp, 0, sizeof dp);
-	cin >> n >> k >> m;
-	if(m != 1){
-		return ;
+	unordered_map<char ,int> mp;
+	string s;
+	cin >> s;
+	for(int i=0; i<s.size(); ++i){
+		mp[s[i]] += 1;
 	}
-	dp[0] = 1;
-	for(int i=1; i<=n; ++i){
-		for(int j=1; j<=min(k, n); ++j){
-			dp[i] += dp[i - j];
-			dp[i] %= MOD;
+	for(int i=0; i<s.size(); ++i){
+		if(mp[s[i]] == 1){
+			cout << s[i];
+		}
+		else{
+			mp[s[i]] -= 1;
 		}
 	}
-	cout << dp[n];
 	return ;
 }
 

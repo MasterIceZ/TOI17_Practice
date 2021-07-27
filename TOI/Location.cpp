@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		: AG_Cute Company
+ * TASK		: Location TOI8
  * ALGO		: Dynamic Programming
- * DATE		: 24 July 2021
+ * DATE		: 21 July 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
@@ -12,33 +12,31 @@ using namespace std;
 #define all(x) (x).begin(), (x).end()
 
 using ll = long long;
-
-const int MOD = 1e9 + 7;
-
-int dp[10010];
+int dp[1111][1111];
 
 void solve(){
 	int n, m, k;
-	memset(dp, 0, sizeof dp);
-	cin >> n >> k >> m;
-	if(m != 1){
-		return ;
-	}
-	dp[0] = 1;
+	cin >> n >> m >> k;
 	for(int i=1; i<=n; ++i){
-		for(int j=1; j<=min(k, n); ++j){
-			dp[i] += dp[i - j];
-			dp[i] %= MOD;
+		for(int j=1; j<=m; ++j){
+			cin >> dp[i][j];
+			dp[i][j] += dp[i][j-1] + dp[i-1][j] - dp[i-1][j-1];
 		}
 	}
-	cout << dp[n];
+	int nax = 0;
+	for(int i=k; i<=n; ++i){
+		for(int j=k; j<=m; ++j){
+			nax = max(nax, dp[i][j] + dp[i-k][j-k] - dp[i-k][j] - dp[i][j-k]);
+		}
+	}
+	cout << nax;
 	return ;
 }
 
 int main(){
 	cin.tie(nullptr)->ios::sync_with_stdio(false);
 	int q = 1;
-	cin >> q;
+//	cin >> q;
 	while(q--){
 		solve();
 		cout << endl;
