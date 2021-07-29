@@ -1,69 +1,76 @@
-/*
- * AUTHOR	: Hydrolyzed~
- * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
- * */
 #include<bits/stdc++.h>
 using namespace std;
 
-#define endl "\n"
-#define all(x) (x).begin(), (x).end()
-
-using ll = long long;
-
-int p[300300], deg[300300];
+vector<int> adj[300300];
+int ans, dp[300300][3], p[300300], mx[300300];
+bool visited[300300];
 
 int fr(int u){
-	return u == p[u] ? u : p[u] = fr(p[u]);
+	return p[u] == u ? u : p[u] = fr(p[u]);
 }
 
-void solve(){
-	int n, m, q;
-	
-	cin >> n >> m >> q;
-//	if(m != 0){
-//		return ;
-//	}
-	for(int i=1; i<=n; ++i){
-		p[i] = i;
-		deg[i] = 1;
+void merge(int u, int v){
+	int ru = fr(u), rv = fr(v);
+	if(ru == rv){
+		return ;
 	}
-	while(q--){
-		int opr;
-		cin >> opr;
-		if(opr == 1){
-			int x;
-			cin >> x;
-			cout << (deg[x] == 1 ? 0 : 2) << "\n";
+	p[rv] = ru;
+}
+
+void dfs(int u, int p){
+	visited[u] = true;
+	for(auto x: adj[u]){
+		if(x == p){
+			continue;
 		}
-		else{
-			int u, v;
-			cin >> u >> v;
-			int ru = fr(u), rv = fr(v);
-			if(ru == rv){
-				continue;
-			}
-			if(deg[ru] > deg[rv]){
-				deg[ru] += deg[rv];
-				p[rv] = ru;
-			}
-			else{
-				deg[rv] += deg[ru];
-				p[ru] = rv;
-			}
+		dfs(x, u);
+		merge(u, x);
+		if(dp[x][0] + 1 > dp[u][0]){
+			dp[u][1] = dp[u][0];
+			dp[u][0] = dp[x][0] + 1;
+		}
+		else if(dp[x][0] + 1 > dp[u][1]){
+			dp[u][1] = dp[x][0] + 1;
 		}
 	}
-	return ;
+	ans = max(ans, dp[u][0] + dp[u][1]);
 }
 
 int main(){
 	cin.tie(nullptr)->ios::sync_with_stdio(false);
-	int q = 1;
-//	cin >> q;
+	int n, m, q;
+	cin >> n >> m >> q;
+	for(int i=1; i<=n; ++i){
+		p[i] = i;
+	}
+	while(m--){
+		int u, v;
+		cin >> u >> v;
+		adj[u].push_back(v), adj[v].push_back(u);
+	}
+	for(int i=1; i<=n; ++i){
+		if(!visited[i]){
+			ans = 0;
+			dfs(i, 0);
+			mx[i] = ans;
+		}
+	}
 	while(q--){
-		solve();
+		int opr, x, y;
+		cin >> opr;
+		if(opr == 1){
+			cin >> x;
+			cout << mx[fr(x)] << "\n";
+		}
+		else{
+			cin >> x >> y;
+			int px = fr(x), py = fr(y);
+			if(px == py){
+				continue;
+			}
+			mx[px] = max({(mx[px] + 1) / 2 + (mx[py] + 1) / 2 + 1, mx[px], mx[py]});
+			merge(px, py);
+		}
 	}
 	return 0;
 }
