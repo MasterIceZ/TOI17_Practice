@@ -25,27 +25,30 @@ void solve(){
 	cin >> n;
 	vector<ll> v;
 	m = n;
-	while(n > 0){
+	while(n > 1){
 		v.push_back(n % 3);
 		n /= 3;
 	}
+	if(n != 0){
+		v.push_back(n);
+	}
+	v.push_back(0);
 	ll cnt = 0, ans = 0;
 	for(int i=0; i<v.size(); ++i){
-		if(v[i] == 1){
-			cnt++;
+		if(v[i] == 3){
+			v[i + 1] += 1;
+		}
+		else if(v[i] == 2){
 			ans += power[i];
+			cnt += 1;
+			v[i + 1] += 1;
 		}
-		if(v[i] == 2 && v[i + 1] != 2){
-			cnt += 2;
-//			cout << "Power : " << power[i + 1] << " " << power[i] << "\n";
-			ans += power[i + 1];
-//			ans -= power[i + 1];
+		else if(v[i] == 1){
+			cnt += 1;
 		}
-//		cout << "ANS : " << cnt << " " << ans << "\n";
-		dbg(cnt);
-		dbg(ans);
 	}
-	cout << cnt << " " << ans;
+	cout << cnt << " " << m + ans;
+//	cout << cnt << " " << ans;
 	return ;
 }
 

@@ -28,12 +28,12 @@ void solve(){
 		b[i] = a[i].first;
 		pos[i] = a[i].second;
 	}
-	ll cnt = n;
+	ll lef = n;
 	for(ll j=1, ans=0; j<=m; ++j, ans=0){
 		cin >> x;
-		for(ll i=cnt; i>=1; --i){
+		for(ll i=lef; i>=1; --i){
 			if(b[i] <= x){
-				cnt = i;
+				lef = i;
 				break;
 			}
 			if(mkr[pos[i]] && mkr[pos[i]] != j){
