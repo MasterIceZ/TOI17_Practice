@@ -18,7 +18,6 @@ int n, m;
 
 void solve(){
 	cin >> n;
-//	unordered_map<ll, int> mp;
 	set<ll> s;
 	ll nax = 0, x;
 	for(int i=1; i<=n; ++i){
@@ -35,8 +34,6 @@ void solve(){
 		}
 		nax = max(x, nax);
 	}
-//	cout << s.size() << " ";
-//	cout << nax;
 	cout << nax - (ll)(s.size()) + 1ll;
 	return ;
 }

@@ -76,6 +76,7 @@ void solve(){
 					}
 					if(!ok){
 						pq.pop();
+						continue;
 					}
 					cout << now.v << endl;
 					break;
