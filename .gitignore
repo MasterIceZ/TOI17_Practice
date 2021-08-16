@@ -5,3 +5,10 @@ Task
 *.out
 
 *.log
+
+*.gen
+*.conf
+
+*.sol
+*.ans
+.env
