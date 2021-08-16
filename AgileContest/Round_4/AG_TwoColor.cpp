@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
+ * TASK		: AG_Two Colour
+ * ALGO		: Matrix Exponential
+ * DATE		: 16 Aug 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
@@ -20,12 +20,7 @@ using namespace std;
 using ll = long long;
 
 void solve(){
-	ll n, ans = 1;
-	cin >> n;
-	for(int i=2 * n; i >= 2; i -= 2){
-		ans += i;
-	}
-	cout << ans;
+	
 	return ;
 }
 
