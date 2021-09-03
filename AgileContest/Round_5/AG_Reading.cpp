@@ -1,60 +1,45 @@
-/*
- * AUTHOR	: Hydrolyzed~
- * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
- * */
 #include<bits/stdc++.h>
 using namespace std;
 
-#define endl "\n"
-#define all(x) (x).begin(), (x).end()
-
-#ifdef _DEBUG
-#include "template.hpp"
-#else
-#define dbg(...) 0
-#endif
-
 using ll = long long;
 
-ll qsP[100100], qsQ[100100];
+ll n, m, qsQ[100100], qsP[100100];
 
 void solve(){
-	ll stp, stq, edp, edq, k;
-	cin >> stp >> stq >> edp >> edq >> k;
-	ll ptq = stq - 1, ptp = stp - 1;
-	ll sumQ = 0, sumP = 0;
-	for(int i=1; i<=k; ++i){
-		if(ptq >= edq){
-			sumP += qsP[ptp++];
-		}
-		else if(sumP + qsP[ptp] <= sumQ + qsQ[ptq] && ptp < edp){
-			sumP += qsP[ptp++];
+	ll a, b, c, d, idx, k;
+	scanf("%lld %lld %lld %lld %lld", &a, &b, &c, &d, &k);
+	ll l = 0, r = 1e18;
+	while(l < r){
+		ll mid = (l + r) / 2;
+		idx = min(c, (ll)(upper_bound(qsP + 1, qsP + n + 1, qsP[a - 1] + mid) - (qsP + 1)));
+		ll idxP = idx - a + 1;
+		idx = min(d, (ll)(upper_bound(qsQ + 1, qsQ + m + 1, qsQ[b - 1] + mid) - (qsQ + 1)));
+		ll idxQ = idx - b + 1;
+		if(idxP + idxQ < k){
+			l = mid + 1;
 		}
 		else{
-			sumQ += qsQ[ptq++];
+			r = mid;
 		}
-		dbg(sumQ, sumP);
 	}
-	cout << max(sumP, sumQ);
+	printf("%lld", l);
 	return ;
 }
 
 int main(){
-	cin.tie(nullptr)->ios::sync_with_stdio(false);
-	ll n, m, q = 1;
-	cin >> n >> m >> q;
-	for(int i=0; i<n; ++i){
-		cin >> qsP[i];
+	int q;
+	scanf("%lld %lld %d", &n, &m, &q);
+	for(int i=1; i<=n; ++i){
+		scanf("%lld", &qsP[i]);
+		qsP[i] += qsP[i - 1];
 	}
-	for(int i=0; i<m; ++i){
-		cin >> qsQ[i];
+	for(int j=1; j<=m; ++j){
+		scanf("%lld", &qsQ[j]);
+		qsQ[j] += qsQ[j - 1];
 	}
 	while(q--){
 		solve();
-		cout << endl;
+		printf("\n");
 	}
 	return 0;
 }
