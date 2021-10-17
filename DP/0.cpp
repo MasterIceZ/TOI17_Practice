@@ -11,6 +11,12 @@ using namespace std;
 #define endl "\n"
 #define all(x) (x).begin(), (x).end()
 
+#ifdef _DEBUG
+#include "template.hpp"
+#else
+#define dbg(...) 0
+#endif
+
 using ll = long long;
 
 void solve(){
