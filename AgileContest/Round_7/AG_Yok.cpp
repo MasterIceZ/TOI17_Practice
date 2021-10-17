@@ -1,54 +1,60 @@
-/*
- * AUTHOR	: Hydrolyzed~
- * SCHOOL	: RYW
- * TASK		: AG_Yok
- * ALGO		: 
- * DATE		: 9 Oct 2021
- * */
 #include<bits/stdc++.h>
 using namespace std;
 
-#define endl "\n"
+using ll = long long;
 #define all(x) (x).begin(), (x).end()
 
-#ifdef _DEBUG
-#include "template.hpp"
-#else
-#define dbg(...) 0
-#endif
-
-using ll = long long;
-
-struct Square{
-	int a, b, c, d;
+struct Point{
+	int type, x1, y1, y2;
+	bool operator < (const Point& o) const{
+		if(x1 != o.x1){
+			return x1 < o.x1;
+		}
+		return type < o.type;
+	}
 };
 
-void solve(){
-	int n, m, k, a, b, c, d;
-	cin >> n >> m >> k;
-	vector<Square> v;
-	for(int i=1; i<=n; ++i){
-		cin >> a >> b >> c >> d;
-		v.push_back({a, b, c, d});
+int tree[100100], ans[100100];
+void update(int idx, int val){
+	for(; idx<=100000; idx+=idx&-idx){
+		tree[idx] += val;
 	}
-	while(m--){
-		int cnt = 0, xx, y;
-		cin >> xx >> y;
-		for(auto x: v){
-			cnt += (x.a <= xx && x.c >= xx && x.b <= y && x.d >= y);
-		}
-		cout << cnt << "\n";
+}
+int read(int idx){
+	int res = 0;
+	for(; idx; idx-=idx& -idx){
+		res += tree[idx];
 	}
-	return ;
+	return res;
 }
 
 int main(){
-	cin.tie(nullptr)->ios::sync_with_stdio(false);
-	int q = 1;
-//	cin >> q;
-	while(q--){
-		solve();
-		cout << endl;
+	int n, m, k, a, b, c, d;
+	scanf("%d %d %d", &n, &m, &k);
+	vector<Point> event;
+	for(int i=1; i<=n; ++i){
+		scanf("%d %d %d %d", &a, &b, &c, &d);
+		a++, b++, c++, d++;
+		event.push_back({1, a, b, d});
+		event.push_back({-1, c + 1, b, d});
+	}
+	for(int i=1; i<=m; ++i){
+		scanf("%d %d", &a, &b);
+		a++, b++;
+		event.push_back({3, a, b, i});
+	}
+	sort(event.begin(), event.end());
+	for(auto x: event){
+		if(x.type != 3){
+			update(x.y1, x.type);
+			update(x.y2 + 1, -x.type);
+		}
+		else{
+			ans[x.y2] = read(x.y1);
+		}
+	}
+	for(int i=1; i<=m; ++i){
+		printf("%d\n", ans[i]);
 	}
 	return 0;
 }
