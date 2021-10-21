@@ -63,6 +63,7 @@ void solve(){
 		if(!done){
 			break;
 		}
+		dbg(i, j);
 	}
 	cout << cnt + 1;
 	return ;
