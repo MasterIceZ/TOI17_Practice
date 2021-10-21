@@ -2,7 +2,7 @@
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
  * TASK		: KU_Bucket
- * ALGO		: Sweepline, Tree
+ * ALGO		: Sweepline, Dynamic Programmin on Tree
  * DATE		: 21 Oct 2021
  * */
 #include<bits/stdc++.h>
