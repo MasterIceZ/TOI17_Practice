@@ -2,7 +2,7 @@
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
  * TASK		: AP_Convoke
- * ALGO		: Dynamic Programming with Bitmasks
+ * ALGO		: Dynamic Programming with Bitmasks, Floyd Warshall, Dijkstra
  * DATE		: 22 Oct 2021
  * */
 #include<bits/stdc++.h>
