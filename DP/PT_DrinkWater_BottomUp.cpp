@@ -32,6 +32,7 @@ void solve(){
 	}
 	memset(dp, 0x3f, sizeof dp);
 	dp[(1 << n) - 1] = 0;
+	int ans = 1e9 + 10;
 	for(int i=(1 << n) - 1; i>=0; --i){
 		for(int j=0; j<n; ++j){
 			if((i & (1 << j)) == 0){
@@ -44,13 +45,16 @@ void solve(){
 				dp[i ^ (1 << j)] = min(dp[i ^ (1 << j)], a[j][k] + dp[i]);
 			}
 		}
-	}
-	int ans = 1e9 + 10;
-	for(int i=(1 << n) - 1; i>=0; --i){
-		if(__builtin_popcount(i) == k){
+		if(__builtin_popcount(i) <= k){
 			ans = min(ans, dp[i]);
 		}
 	}
+//	int ans = 1e9 + 10;
+//	for(int i=(1 << n) - 1; i>=0; --i){
+//		if(__builtin_popcount(i) == k){
+//			ans = min(ans, dp[i]);
+//		}
+//	}
 	cout << ans;
 	return ;
 }
