@@ -2,7 +2,7 @@
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
  * TASK		: AG_Shootmarble
- * ALGO		: SAWA
+ * ALGO		: Greedy
  * DATE		: 2 Nov 2021
  * */
 #include<bits/stdc++.h>
@@ -19,17 +19,33 @@ using namespace std;
 
 using ll = long long;
 
-int a[200200];
+int cnt[22];
 
 void solve(){
-	memset(a, 0, sizeof a);
 	int n;
 	cin >> n;
-	for(int i=1; i<=n; ++i){
-		cin >> a[i];
-		a[i] += a[i - 1];
+	for(int i=1, x; i<=n; ++i){
+		cin >> x;
+		for(int j=0; j<=20; ++j){
+			if((1 << j) & x){
+				cnt[20 - j] += 1;
+			}
+		}
 	}
-	cout << a[n];
+	ll ans = 0;
+	for(int i=1; i<=n; ++i){
+		ll tmp = 0;
+		for(int j=0; j<=20; ++j){
+			tmp *= 2;
+			if(cnt[j] > 0){
+				tmp += 1;
+				cnt[j] -= 1;
+			}
+		}
+		dbg(tmp);
+		ans += tmp * tmp;
+	}
+	cout << ans;
 	return ;
 }
 

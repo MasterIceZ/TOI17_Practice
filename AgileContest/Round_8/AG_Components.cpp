@@ -19,78 +19,65 @@ using namespace std;
 
 using ll = long long;
 
-vector<ll> prime = {2};
-ll dp[333], p;
-bool ch[111], visited[111];
-vector<int> adj[111];
+vector<int> prime = {0};
+bitset<1000010> ch;
+int p[1000100];
 
-void dfs(int u){
-	dbg(p, u);
-	visited[u] = true;
-	for(auto x: adj[u]){
-		if(!visited[x]){
-			dfs(x);
-		}
-	}
+int fr(int u){
+	return u == p[u] ? u : p[u] = fr(p[u]);
 }
 
 void solve(){
-	int x;
-	cin >> x;
-	if(x > 20){
-		return ;
+	int n;
+	cin >> n;
+	int pr = prime[n];
+	for(int i=1; i<=pr; ++i){
+		p[i] = i;
 	}
-	cout << dp[x];
+	for(ll i=1; i<=pr; ++i){
+		ll u = i;
+		ll v = (((i * i * i) % pr) + 1) % pr;
+		if(v == 0){
+			v = pr;
+		}
+		p[fr(u)] = fr(v);
+		dbg(u, v);
+	}
+	for(int i=1; i<=pr; ++i){
+		p[i] = fr(i);
+	}
+	sort(p + 1, p + pr + 1);
+	int cnt = 0, last = -1;
+	for(int i=1; i<=pr; ++i){
+		dbg(p[i]);
+		if(last != p[i]){
+			cnt++;
+		}
+		last = p[i];
+	}
+	cout << cnt;
 	return ;
 }
 
 int main(){
 	cin.tie(nullptr)->ios::sync_with_stdio(false);
 	
-	for(ll i=3; i*i<=100; i+=2){
+	for(ll i=2; i<=1000000; ++i){
 		if(ch[i]){
 			continue;
 		}
-		for(ll j=i*i; j<=100; j+=i){
+		for(ll j=i*2; j<=1000000; j+=i){
 			ch[j] = 1;
 		}
+		prime.push_back(i);
 	}
-	for(ll i=3; i<=100; i+=2){
-		if(!ch[i]){
-			prime.push_back(i);
-		}
-		if(prime.size() == 20){
-			break;
-		}
-	}
-	for(int i=1; i<=prime.size(); ++i){
-		p = prime[i - 1];
-		for(ll j=1; j<=p; ++j){
-			for(ll k=j+1; k<=p; ++k){
-				if((j*j*j-k+1) % p == 0 || (k*k*k-j+1) % p == 0){
-					adj[j].push_back(k);
-					adj[k].push_back(j);
-				}
-			}
-		}
-		memset(visited, false, sizeof visited);
-		int cnt = 0;
-		for(int j=1; j<=p; ++j){
-			if(!visited[j]){
-				dfs(j);
-				cnt++;
-			}
-		}
-		dp[i] = cnt;
-		for(int j=1; j<=p; ++j){
-			adj[j].clear();
-		}
-	}
-	int q = 1;
+	dbg(prime.size());
+	int q;
 	cin >> q;
 	while(q--){
 		solve();
 		cout << endl;
 	}
+//	while(1);
 	return 0;
 }
