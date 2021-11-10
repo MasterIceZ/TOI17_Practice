@@ -1,5 +1,13 @@
 using namespace std;
 
+template<class T> vector<T> to_vector(T a[], int l, int r){
+	vector<T> v;
+	for(int i=l; i<=r; ++i){
+		v.push_back(a[i]);
+	}
+	return v;
+}
+
 string to_string(const char* s){
 	return string(s);
 }
