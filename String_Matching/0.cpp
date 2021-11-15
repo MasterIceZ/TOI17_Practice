@@ -8,6 +8,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+#define endl "\n"
+#define all(x) (x).begin(), (x).end()
+
 #ifdef _DEBUG
 #include "template.hpp"
 #else
@@ -27,7 +30,7 @@ int main(){
 //	cin >> q;
 	while(q--){
 		solve();
-		cout << "\n";
+		cout << endl;
 	}
 	return 0;
 }

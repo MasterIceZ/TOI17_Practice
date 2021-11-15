@@ -8,10 +8,6 @@ template<class T> vector<T> to_vector(T a[], int l, int r){
 	return v;
 }
 
-string to_string(char s){
-	return string(1, s);
-}
-
 string to_string(const char* s){
 	return string(s);
 }

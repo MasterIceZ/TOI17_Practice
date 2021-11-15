@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
+ * TASK		: toi7_space
+ * ALGO		: Implemenetation
+ * DATE		: 15 Nov 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
@@ -16,8 +16,27 @@ using namespace std;
 
 using ll = long long;
 
-void solve(){
+int n;
 
+void rec(string s){
+	if(s.size() == n){
+		for(int i=n - 1; i>=0; --i){
+			if(s[i] == '0'){
+				cout << s << " ";
+				s[i] = '1';
+				cout << s << "\n";
+				s[i] = '0';
+			}
+		}
+		return ;
+	}
+	rec(s + "0");
+	rec(s + "1");
+}
+
+void solve(){
+	cin >> n;
+	rec("");
 	return ;
 }
 
