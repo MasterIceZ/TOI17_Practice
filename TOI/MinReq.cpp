@@ -16,7 +16,7 @@ using ll = long long;
 const int MxN = 1e7 + 2;
 
 int p[15];
-int l[15], a[15], s[15], t[15], qr[MxN], qs[15];
+int l[15], a[15], s[15], qr[MxN], qs[15];
 int n, m, x;
 
 bool val(int t){
@@ -53,10 +53,11 @@ bool solve2(int x){
 	for(int i=1; i<=n; ++i){
 		cin >> p[i];
 	}
-	p[n+1] = m;
+	p[n+1] = m + 1;
 	do{
-		if(val(x))
-		return true;
+		if(val(qr[x])){
+			return true;
+		}
 	}while(next_permutation(a+1, a+n+1));
 	return false;
 }
@@ -89,7 +90,6 @@ int main(){
 //	cin >> q;
 	while(q--){
 		solve();
-		cout << endl;
 	}
 	return 0;
 }
