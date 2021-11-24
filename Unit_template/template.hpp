@@ -3,6 +3,10 @@
 #include <cstring>
 using namespace std;
 
+void warn(string s){
+	cerr << "[!] Warning : \"" << s << "\"\n";
+}
+
 template<class T> vector<T> to_vector(T a[], int l, int r){
 	vector<T> v;
 	for(int i=l; i<=r; ++i){
@@ -19,7 +23,7 @@ string to_string(char s){
 	return string(1, s);
 }
 
-string to_string(const char* s){
+string to_string(char* s){
 	return string(s);
 }
 
@@ -52,4 +56,5 @@ template<class H, class... T> void DBG(H h, T... t){
 #define dbg(...) cerr << "Line(" << __LINE__ << ") -> [" << #__VA_ARGS__ << "]: [", DBG(__VA_ARGS__)
 #else
 #define dbg(...) 0
+#define warn(...) 0
 #endif

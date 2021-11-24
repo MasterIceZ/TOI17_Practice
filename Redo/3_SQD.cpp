@@ -17,23 +17,22 @@ using namespace std;
 using ll = long long;
 
 const int MxN = 100100;
-int dp[MxN];
-int a[MxN];
+const int LG = 400;
+
+int a[MxN], cluster[LG];
 
 void solve(){
-	int n, s, x, y;
-	cin >> n >> s;
-	for(int i=1; i<=n; ++i){
-		cin >> x >> y;
-		a[i] = max(y, x-s);	
+	char o;
+	int n, q, idx, x, l, r;
+	cin >> n >> q;
+	int sq = sqrt(n);
+	while(q--){
+		cin >> o;
+		if(o == 'U'){
+			cin >> idx >> x;
+			
+		}
 	}
-	int sz = 0;
-	for(int i=1; i<=n; ++i){
-		int idx = upper_bound(dp, dp + sz, a[i]) - dp;
-		sz += (idx == sz);
-		dp[idx] = a[i];
-	}
-	cout << sz;
 	return ;
 }
 

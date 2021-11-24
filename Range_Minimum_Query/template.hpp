@@ -1,6 +1,3 @@
-#include <vector>
-#include <string>
-#include <cstring>
 using namespace std;
 
 template<class T> vector<T> to_vector(T a[], int l, int r){
@@ -9,10 +6,6 @@ template<class T> vector<T> to_vector(T a[], int l, int r){
 		v.push_back(a[i]);
 	}
 	return v;
-}
-
-string to_string(string s){
-	return s;
 }
 
 string to_string(char s){

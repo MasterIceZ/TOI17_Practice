@@ -16,7 +16,7 @@ using ll = long long;
 const int MxN = 1e7 + 2;
 
 int p[15];
-int l[15], a[15], s[15], qr[MxN], qs[15];
+int l[15], a[15], s[15], qr[15], qs[MxN];
 int n, m, x;
 
 bool val(int t){
