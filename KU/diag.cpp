@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
+ * TASK		: diag
+ * ALGO		: Math
+ * DATE		: 27 Nov 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
@@ -19,26 +19,36 @@ using namespace std;
 
 using ll = long long;
 
+const int MxN = 100100;
+double x[MxN], y[MxN], Sx[MxN], Sy[MxN], xx, yy;
+
 void solve(){
 	int n;
 	cin >> n;
-	vector<pair<int, int>> v;
-	vector<int> mx, my;
-	for(int i=1, x, y; i<=n; ++i){
-		cin >> x >> y;
-		mx.push_back(x);
-		my.push_back(y);
-		v.emplace_back(x, y);
+	for(int i=1; i<=n; ++i){
+		cin >> xx >> yy;
+		x[i] = (xx - yy) / 2;
+		y[i] = (xx + yy) / 2;
 	}
-	sort(all(mx));
-	sort(all(my));
-	int medx = mx[n / 2 - 1];
-	int medy = my[n / 2 - 1];
-	int ans = 0;
-	for(auto x: v){
-		ans += max(abs(medx - x.first), abs(medy - x.second));
+	memcpy(Sx, x, sizeof x);
+	memcpy(Sy, y, sizeof y);
+	sort(Sx + 1, Sx + n + 1);
+	sort(Sy + 1, Sy + n + 1);
+	double medx, medy;
+	if(n % 2){
+		medx = Sx[(n + 1) / 2];
+		medy = Sy[(n + 1) / 2];
 	}
-	cout << ans * 2;
+	else{
+		medx = (Sx[n / 2] + Sx[(n + 1) / 2]) / 2;
+		medy = (Sy[n / 2] + Sy[(n + 1) / 2]) / 2;
+	}
+	dbg(medx, medy);
+	double sum = 0;
+	for(int i=1; i<=n; ++i){
+		sum += abs(x[i] - medx) + abs(y[i] - medy);
+	}
+	cout << fixed << setprecision(0) << (sum * 2);
 	return ;
 }
 
