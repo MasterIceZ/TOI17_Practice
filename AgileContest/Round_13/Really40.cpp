@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		: AG_Moss Most
- * ALGO		: Counting Sort
- * DATE		: 3 Nov 2021
+ * TASK		:
+ * ALGO		:
+ * DATE		:
  * */
 #include<bits/stdc++.h>
 using namespace std;
@@ -16,22 +16,25 @@ using namespace std;
 
 using ll = long long;
 
-void solve2(){
-	int n;
-	cin >> n;
-	unordered_map<int, int> cnt;
+void solve(){
+	int n, k;
+	cin >> n >> k;
+	queue<int> q;
 	for(int i=1, x; i<=n; ++i){
 		cin >> x;
-		cnt[x]++;
-		if(cnt[x + 1] != 0){
-			cnt[x + 1]--;
+		q.push(x);
+	}
+	int cnt = 0;
+	for(int i=1; i<=k; ++i){
+		while((q.front() % n) != (i % n)){
+			dbg(i, q.front());
+			q.push(q.front());
+			q.pop();
+			cnt++;
 		}
 	}
-	int ans = 0;
-	for(auto x: cnt){
-		ans += x.second;
-	}
-	cout << ans;
+	cout << cnt;
+	return ;
 }
 
 int main(){
@@ -39,7 +42,8 @@ int main(){
 	int q = 1;
 //	cin >> q;
 	while(q--){
-		solve2();
+		solve();
+//		solve2();
 		cout << "\n";
 	}
 	return 0;

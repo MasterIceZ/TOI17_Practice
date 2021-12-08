@@ -1,8 +1,8 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		: AG_Equality
- * ALGO		: Binary Search
+ * TASK		: AG_Punch Nun
+ * ALGO		: Dynamic Programming
  * DATE		: 3 Dec 2021
  * */
 #include<bits/stdc++.h>
@@ -16,39 +16,22 @@ using namespace std;
 
 using ll = long long;
 
-int a[1000100], b[1000100];
+const int MxN = 2020;
+int a[MxN], dp[MxN][MxN];
 
 void solve(){
-	int n, k, p;
-	cin >> n >> k >> p;
+	int n;
+	cin >> n;
 	for(int i=1; i<=n; ++i){
 		cin >> a[i];
-		b[i] = a[i];
 	}
-	sort(b + 1, b + n + 1);
-	int l, r, ans;
-	l = 1, r = n;
-	while(l < r){
-		int mid = (l + r) >> 1;
-		int cnt = 0;
-		for(int i=1; i<=n; ){
-			if(b[mid] < a[i]){
-				i+=p;
-				cnt++;
-			}
-			else{
-				i++;
-			}
-		}
-		if(cnt > k){
-			l = mid + 1;
-		}
-		else{
-			r = mid;
-			ans = b[mid];
+	for(int i=1; i<=n; ++i){
+		dp[i][0] = max(dp[i - 1][0], dp[i - 1][2] - a[i]);
+		for(int j=1; j<=i; ++j){
+			dp[i][j] = max(dp[i - 1][j + 2] - a[i], dp[i - 1][j - 1] + a[i]);
 		}
 	}
-	cout << ans;
+	cout << dp[n][0];
 	return ;
 }
 

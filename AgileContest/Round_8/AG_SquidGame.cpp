@@ -31,7 +31,7 @@ void solve(){
 		cin >> v;
 		t[j] = j + (m / v);
 	}
-		deque<ll> st;
+	deque<ll> st;
 	for(int i=1; i<=n; ++i){
 		while(!st.empty() && t[i] < t[st.back()] && s[i] > s[st.back()]){
 			st.pop_back();

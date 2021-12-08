@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
+ * TASK		: AG_Cap Moo
+ * ALGO		: String Matching, Math
+ * DATE		: 6 Dec 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
