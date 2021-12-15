@@ -1,9 +1,9 @@
 /*
  * AUTHOR	: Hydrolyzed~
  * SCHOOL	: RYW
- * TASK		:
- * ALGO		:
- * DATE		:
+ * TASK		: toi2_dice
+ * ALGO		: Implementation
+ * DATE		: 14 Dec 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;

@@ -3,7 +3,7 @@
  * SCHOOL	: RYW
  * TASK		: toi3_blockgame
  * ALGO		: Brute Force
- * DATE		: 17 Nov 2021
+ * DATE		: 14 Dec 2021
  * */
 #include<bits/stdc++.h>
 using namespace std;
