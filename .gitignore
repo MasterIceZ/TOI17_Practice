@@ -1,5 +1,7 @@
 Task
 
+.secret/
+
 *.exe
 *.in
 *.out
